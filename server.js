@@ -14,7 +14,7 @@ mongoose.connect(config.db, { useNewUrlParser: true }, err => {
 //   // prefix: '/api'
 // })
 const bodyParser = require('koa-bodyparser')
-app.use(bodyParser({multipart: true}))
+app.use(bodyParser({ multipart: true }))
 
 const userRouter = require('./server/routes/user')
 app.use(userRouter.routes()).use(userRouter.allowedMethods())

@@ -1,11 +1,12 @@
-<!-- 首页 -->
+<!-- 友情链接 -->
 <template>
     <div>
         <wbc-nav></wbc-nav>
         <div class="container">
             <el-row  :gutter="30">
                 <el-col :sm="24" :md="16" style="transition:all .5s ease-out;margin-bottom:30px;">
-                    <wbc-sharelist></wbc-sharelist>
+                    <wbc-friends></wbc-friends>
+                    <wbc-message></wbc-message>
                 </el-col>
                 <el-col :sm="24"  :md="8" >
                     <wbc-rightlist></wbc-rightlist>
@@ -19,10 +20,11 @@
 <script>
 import header from '../components/header.vue'
 import footer from '../components/footer.vue'
-import temSharelist from '../components/temSharelist.vue'
+import temFriends from '../components/temFriends.vue'
 import temRightlist from '../components/temRightlist.vue'
+import temMessage from '../components/temMessage.vue'
 export default {
-  name: 'Home',
+  name: 'FriendsLink',
   data () { // 选项 / 数据
     return {
 
@@ -33,7 +35,8 @@ export default {
   },
   components: { // 定义组件
     'wbc-nav': header,
-    'wbc-sharelist': temSharelist,
+    'wbc-message': temMessage,
+    'wbc-friends': temFriends,
     'wbc-rightlist': temRightlist,
     'wbc-footer': footer
   },
