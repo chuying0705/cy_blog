@@ -87,7 +87,7 @@ export default {
       var that = this
       if (localStorage.getItem('userInfo')) { // 判断是否登录
         var tip = ''
-        if (islike == 1) {
+        if (islike === 1) {
           if (!that.likeArt) {
             that.likeCount += 1
             that.likeArt = true
@@ -131,7 +131,7 @@ export default {
     },
     routeChange: function () {
       var that = this
-      that.aid = that.$route.query.aid == undefined ? 1 : parseInt(that.$route.query.aid)// 获取传参的aid
+      that.aid = that.$route.query.aid === undefined ? 1 : parseInt(that.$route.query.aid)// 获取传参的aid
       // 判断用户是否存在
       if (localStorage.getItem('userInfo')) {
         that.haslogin = true

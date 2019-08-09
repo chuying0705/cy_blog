@@ -1,13 +1,13 @@
 <!-- 文章列表 -->
 <template>
     <el-row class="sharelistBox">
-        <div v-if="this.$route.name=='Share'&&!this.$route.query.keywords" class="shareTitle">
+        <div v-if="this.$route.name==='Share'&&!this.$route.query.keywords" class="shareTitle">
             <div class="ui label" >
                 <a  :href="'#/Share?classId='+classId">{{className}}</a>
             </div>
             <ul v-if="sonclassList" class="shareclassTwo" >
-                <li v-for="(citem,index) in sonclassList">
-                    <a :href="'#/Share?classId='+classId+'&classtwoId='+citem.class_id" :class="citem.class_id==classtwoId?'active':''">{{citem.cate_name}}</a>
+                <li v-for="(citem,index) in sonclassList" :key="index">
+                    <a :href="'#/Share?classId='+classId+'&classtwoId='+citem.class_id" :class="citem.class_id===classtwoId?'active':''">{{citem.cate_name}}</a>
                 </li>
             </ul>
         </div>
@@ -100,9 +100,9 @@ export default {
     },
     showSearchShowList: function (initpage) { // 展示数据
       var that = this
-      that.classId = (that.$route.query.classId == undefined ? 0 : parseInt(that.$route.query.classId))// 获取传参的classId
+      that.classId = (that.$route.query.classId === undefined ? 0 : parseInt(that.$route.query.classId))// 获取传参的classId
       that.keywords = that.$store.state.keywords// 获取传参的keywords
-      that.classtwoId = that.$route.query.classtwoId == undefined ? '' : parseInt(that.$route.query.classtwoId)// 获取传参的classtwoId
+      that.classtwoId = that.$route.query.classtwoId === undefined ? '' : parseInt(that.$route.query.classtwoId)// 获取传参的classtwoId
       that.sendId = that.classtwoId ? that.classtwoId : that.classId
       that.level = that.keywords ? 0 : that.classtwoId ? 0 : 1
       // console.log(that.classId);
@@ -112,7 +112,7 @@ export default {
       })
       // 判断当前显示的分类名称 以及子分类
       for (var i = 0; i < that.shareClass.length; i++) {
-        if (that.classId == that.shareClass[i].class_id) {
+        if (that.classId === that.shareClass[i].class_id) {
           that.className = that.shareClass[i].cate_name
           if (that.shareClass[i].ChildsSon && that.shareClass[i].ChildsSon.length > 0) {
             that.sonclassList = that.shareClass[i].ChildsSon
@@ -125,7 +125,7 @@ export default {
       that.artId = initpage ? 0 : that.artId
       ShowArticleAll(that.artId, that.sendId, that.keywords, that.level, (result) => {
         // console.log(result);
-        if (result.code == 1001) {
+        if (result.code === 1001) {
           var msg = result.data
           if (msg.length > 0 && msg.length < 10) {
             that.hasMore = false
@@ -145,7 +145,7 @@ export default {
       this.showSearchShowList(false)
     },
     routeChange: function () {
-      var that = this
+      // var that = this
       this.showSearchShowList(true)
     }
   },

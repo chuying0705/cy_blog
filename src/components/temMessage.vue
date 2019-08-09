@@ -203,7 +203,7 @@ export default {
       if (content) {
         for (var i = 0; i < content.length; i++) {
           for (var j = 0; j < this.OwOlist.length; j++) {
-            if ('[' + this.OwOlist[j].title + ']' == content[i]) {
+            if ('[' + this.OwOlist[j].title + ']' === content[i]) {
               var src = this.OwOlist[j].url
               break
             }
@@ -219,7 +219,7 @@ export default {
       var that = this
       if (that.textarea) {
         that.sendTip = '咻~~'
-        if (that.leaveId == 0) {
+        if (that.leaveId === 0) {
           //   console.log(that.textarea,that.userId,that.aid,that.leavePid,that.pid);
           setArticleComment(that.textarea, that.userId, that.aid, that.leavePid, that.pid, function (msg) {
             //   console.log(msg);
@@ -278,7 +278,7 @@ export default {
     },
     showCommentList: function (initData) { // 评论列表
       var that = this
-      that.aid = that.$route.query.aid == undefined ? 1 : parseInt(that.$route.query.aid)// 获取传参的aid
+      that.aid = that.$route.query.aid === undefined ? 1 : parseInt(that.$route.query.aid)// 获取传参的aid
       // 判断当前用户是否登录
       if (localStorage.getItem('userInfo')) {
         that.haslogin = true
@@ -292,7 +292,7 @@ export default {
       that.pageId = initData ? 0 : that.pageId
       // 公用设置数据方法
       function setData (result) {
-        if (result.code == 1001) { // 查询数据
+        if (result.code === 1001) { // 查询数据
           var msg = result.data
           //   console.log("留言数据",result.data);
           if (msg.length > 0 && msg.length < 8) {
@@ -307,19 +307,19 @@ export default {
           that.commentList = initData ? [] : that.commentList
         }
       }
-      if (that.$route.name == 'DetailShare') { // 文章列表的评论
+      if (that.$route.name === 'DetailShare') { // 文章列表的评论
         that.leaveId = 0
         ArticleComment(that.aid, that.pageId, function (result) { // 查询列表
           setData(result)
         })
       } else { // 其他评论
-        if (that.$route.name == 'Reward') { // （1：赞赏 2：友情链接 3：留言板 4：关于我）
+        if (that.$route.name === 'Reward') { // （1：赞赏 2：友情链接 3：留言板 4：关于我）
           that.leaveId = 1
-        } else if (that.$route.name == 'FriendsLink') {
+        } else if (that.$route.name === 'FriendsLink') {
           that.leaveId = 2
-        } else if (that.$route.name == 'Message') {
+        } else if (that.$route.name === 'Message') {
           that.leaveId = 3
-        } else if (that.$route.name == 'Aboutme') {
+        } else if (that.$route.name === 'Aboutme') {
           that.leaveId = 4
         }
         OtherComment(that.leaveId, that.pageId, function (result) {

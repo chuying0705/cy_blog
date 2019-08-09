@@ -118,7 +118,7 @@ export default {
           job: 'http://aimee.mangoya.cn'
         }
       },
-      isAimee: this.$store.state.themeObj.user_start != 0 ? 'Aimee' : 'Qinlh'// 判断是哪个的博客
+      isAimee: this.$store.state.themeObj.user_start !== 0 ? 'Aimee' : 'Qinlh'// 判断是哪个的博客
     }
   },
   methods: { // 事件处理器
@@ -146,7 +146,7 @@ export default {
         var ispeed = Math.floor(-osTop / 7)
         document.documentElement.scrollTop = document.body.scrollTop = osTop + ispeed
         // 到达顶部，清除定时器
-        if (osTop == 0) {
+        if (osTop === 0) {
           that.going = false
           clearInterval(timer)
           timer = null

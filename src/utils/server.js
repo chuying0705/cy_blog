@@ -35,25 +35,25 @@ const LoginOut = (token, callback) => {
     callback && callback(num.data)
   })
 }
-//
-// // 文章分类查询
-// const ArtClassData = (callback) => {
-//   if (sessionStorage.getItem('classList')) {
-//     var data = JSON.parse(sessionStorage.getItem('classList'))
-//     callback && callback(data)
-//   } else {
-//     let url = portUrl + 'article/ArtClassData'
-//     axios.get(url).then(num => {
-//       // console.log(num);
-//       if (num.data.code === 1001) {
-//         sessionStorage.setItem('classList', JSON.stringify(num.data.data))
-//         callback && callback(num.data.data)
-//       } else {
-//         alert('查询失败')
-//       }
-//     })
-//   }
-// }
+
+// 文章分类查询
+const ArtClassData = (callback) => {
+  if (sessionStorage.getItem('classList')) {
+    var data = JSON.parse(sessionStorage.getItem('classList'))
+    callback && callback(data)
+  } else {
+    let url = portUrl + 'article/ArtClassData'
+    axios.get(url).then(num => {
+      // console.log(num);
+      if (num.data.code === 1001) {
+        sessionStorage.setItem('classList', JSON.stringify(num.data.data))
+        callback && callback(num.data.data)
+      } else {
+        alert('查询失败')
+      }
+    })
+  }
+}
 //
 // // 实验室 列表项目
 // const navMenList = (callback) => {
@@ -161,7 +161,7 @@ const LoginOut = (token, callback) => {
 // const showLikeData = (callback) => {
 //   let url = portUrl + 'outh/showLikeData'
 //   axios.get(url).then(num => {
-//     if (num.data.code == 1001) {
+//     if (num.data.code === 1001) {
 //       // console.log(num.data,parseInt(num.data));
 //       callback && callback(num.data.data)
 //     } else {
@@ -196,25 +196,29 @@ const LoginOut = (token, callback) => {
 //   })
 // }
 //
-// // 查询关于我
-// const AboutMeData = (callback) => {
-//   if (sessionStorage.getItem('AboutMeData')) {
-//     var data = JSON.parse(sessionStorage.getItem('AboutMeData'))
-//     callback && callback(data)
-//   } else {
-//     let url = portUrl + 'outh/AboutMeData'
-//     axios.get(url).then(num => {
-//       if (num.data.code === 1001) {
-//         sessionStorage.setItem('AboutMeData', JSON.stringify(num.data.data))
-//         callback && callback(num.data.data)
-//       } else if (num.data.code === 1005) {
-//
-//       } else {
-//         alert('查询失败')
-//       }
-//     })
-//   }
-// }
+// 查询关于我
+const AboutMeData = (callback) => {
+  if (sessionStorage.getItem('AboutMeData')) {
+    var data = JSON.parse(sessionStorage.getItem('AboutMeData'))
+    callback && callback(data)
+  } else {
+    let data = {
+      name: 'test'
+    }
+    callback && callback(data)
+    // let url = portUrl + 'outh/AboutMeData'
+    // axios.get(url).then(num => {
+    //   if (num.data.code === 1001) {
+    //     sessionStorage.setItem('AboutMeData', JSON.stringify(num.data.data))
+    //     callback && callback(num.data.data)
+    //   } else if (num.data.code === 1005) {
+    //
+    //   } else {
+    //     alert('查询失败')
+    //   }
+    // })
+  }
+}
 //
 // // 文章点击收藏 点击喜欢
 // const getArtLikeCollect = (userId, artId, islike, callback) => {
@@ -318,29 +322,34 @@ const LoginOut = (token, callback) => {
 //   }
 // }
 //
-// // 获取主题信息
-// const changeTheme = (callback) => {
-//   if (sessionStorage.getItem('changeThemeObj')) {
-//     var data = JSON.parse(sessionStorage.getItem('changeThemeObj'))
-//     callback && callback(data)
-//   } else {
-//     let url = portUrl + 'outh/ThemeMy'
-//     axios.get(url).then(num => {
-//       if (num.data.code === 1001) {
-//         sessionStorage.setItem('changeThemeObj', JSON.stringify(num.data.data))
-//         callback && callback(num.data.data)
-//       } else {
-//         alert('查询失败')
-//       }
-//     })
-//   }
-// }
+// 获取主题信息
+const changeTheme = (callback) => {
+  if (sessionStorage.getItem('changeThemeObj')) {
+    var data = JSON.parse(sessionStorage.getItem('changeThemeObj'))
+    callback && callback(data)
+  } else {
+    let themeObj = {
+      top_image: require('@/assets/img/bg_1.jpg'),
+      user_start: 'Hello! qwe'
+    }
+    callback && callback(themeObj)
+    // let url = portUrl + 'outh/ThemeMy'
+    // axios.get(url).then(num => {
+    //   if (num.data.code === 1001) {
+    //     sessionStorage.setItem('changeThemeObj', JSON.stringify(num.data.data))
+    //     callback && callback(num.data.data)
+    //   } else {
+    //     alert('查询失败')
+    //   }
+    // })
+  }
+}
 
 export {
   getRegister, // 注册
   UserLogin, // 登录
-  LoginOut // 退出登录
-  // ArtClassData, // 分类
+  LoginOut, // 退出登录
+  ArtClassData, // 分类
   // navMenList, // 导航信息
   // ShowArticleAll, // 查询文章列表
   // getArticleInfo, // 文章详情
@@ -353,12 +362,12 @@ export {
   // showLikeData, // do you like me
   // GetLike, // 设置 do you like me
   // FriendUrlData, // 友情链接数据
-  // AboutMeData, // 关于我文章编写
+  AboutMeData, // 关于我文章编写
   // getArtLikeCollect, // 文章收藏 文章点赞
   // AdmireData, // 赞赏数据
   // getLikeCollectList, // 用户收藏喜欢列表
   // getUserInfo, // 用户信息查询
   // UserInfoSave, // 修改用户信息
   // initDate, // 设置时间
-  // changeTheme// 获取主题信息
+  changeTheme// 获取主题信息
 }

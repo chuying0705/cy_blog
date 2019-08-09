@@ -124,7 +124,7 @@
                         </li>
                         <li>
                             <span class="leftTitle">性别</span>
-                            <span>{{userInfoObj.sex==0?'男':'女'}}</span>
+                            <span>{{userInfoObj.sex===0?'男':'女'}}</span>
                         </li>
                         <li>
                             <span class="leftTitle">个性标签</span>
@@ -192,7 +192,7 @@ export default {
     handleAvatarSuccess (res, file) { // 上传头像
       // console.log('用户头像',res.image_name,file);
       // console.log(URL.createObjectURL(file.raw));
-      if (res.code == 1001) { // 存储
+      if (res.code === 1001) { // 存储
         this.userInfoObj.avatar = res.image_name
         this.userInfoObj.head_start = 1
       } else {
@@ -200,7 +200,7 @@ export default {
       }
     },
     beforeAvatarUpload (file) { // 判断头像大小
-      const isJPG = file.type == 'image/png' || file.type == 'image/jpg' || file.type == 'image/jpeg'
+      const isJPG = file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg'
       const isLt2M = file.size / 1024 / 1024 < 1
       // console.log(file);
       if (!isJPG) {
@@ -212,7 +212,7 @@ export default {
       return isJPG && isLt2M
     },
     handleLogoSuccess (res, file) { // 上传网站logo
-      if (res.code == 1001) { // 存储
+      if (res.code === 1001) { // 存储
         this.userInfoObj.image = res.image_name
         this.userInfoObj.logo_start = 1
       } else {
@@ -220,7 +220,7 @@ export default {
       }
     },
     beforeLogoUpload (file) { // 控制网站logo图片大小
-      const isJPG = file.type == 'image/png' || file.type == 'image/jpg' || file.type == 'image/jpeg'
+      const isJPG = file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg'
       const isLt2M = file.size / 1024 / 1024 < 1
 
       if (!isJPG) {
@@ -273,7 +273,7 @@ export default {
           that.userInfoObj = msg.data
           that.userInfoObj.head_start = 0
           that.userInfoObj.logo_start = 0
-          that.state = msg.data.state == 1
+          that.state = msg.data.state === 1
         })
         // console.log(that.userInfo);
       } else {

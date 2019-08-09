@@ -16,8 +16,10 @@ mongoose.connect(config.db, { useNewUrlParser: true }, err => {
 const bodyParser = require('koa-bodyparser')
 app.use(bodyParser({ multipart: true }))
 
-const userRouter = require('./server/routes/user')
-app.use(userRouter.routes()).use(userRouter.allowedMethods())
+// const userRouter = require('./server/routes/user')
+// app.use(userRouter.routes()).use(userRouter.allowedMethods())
+const router = require('./server/routes/index')
+app.use(router.routes(), router.allowedMethods())
 
 app.on('error', function (err, ctx) {
   console.log('server error', err)

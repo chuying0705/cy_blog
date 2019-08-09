@@ -12,7 +12,7 @@ export const state = {
   aboutmeObj: '', // 关于我的信息
   host: 'http://' + window.location.host + '/port/', // 接口路径
   keywords: '', // 关键词
-  errorImg: 'this.onerror=null;this.src="' + require('@/assets/logo.png') + '"'
+  errorImg: 'this.onerror=null;this.src="' + require('@/assets/img/logo.png') + '"'
 }
 
 export default new Vuex.Store({

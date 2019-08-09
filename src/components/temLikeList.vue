@@ -4,7 +4,7 @@
         <div class="container">
             <el-row>
                 <div class="likeBoxTitle">
-                    <h1 v-show="like==1"><i class="fa fa-wa fa-heart"></i>喜欢的文章</h1>
+                    <h1 v-show="like===1"><i class="fa fa-wa fa-heart"></i>喜欢的文章</h1>
                     <h1 v-show="like!=1"><i class="fa fa-wa fa-star"></i>收藏的文章</h1>
                 </div>
                 <el-col :span="24" class="s-item tcommonBox" v-for="(item,index) in articleList" :key="'like'+index">
@@ -41,7 +41,7 @@
                         </p>
                     </div>
                     <div class="viewdetail">
-                        <a class="cancelbtn tcolors-bg" href="javascript:void(0);" @click="cancelLikeCollect(item.id)">取消{{like==1?'喜欢':'收藏'}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="cancelbtn tcolors-bg" href="javascript:void(0);" @click="cancelLikeCollect(item.id)">取消{{like===1?'喜欢':'收藏'}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
                         <a class="tcolors-bg" :href="'#/DetailShare?aid='+item.id" target="_blank">
                             阅读全文>>
                         </a>
@@ -88,7 +88,7 @@ export default {
         that.userId = that.userInfo.userId
         // console.log(that.userInfo);
       }
-      that.like = that.$route.query.like == undefined ? 1 : parseInt(that.$route.query.like)
+      that.like = that.$route.query.like === undefined ? 1 : parseInt(that.$route.query.like)
       that.articleName = that.$store.state.keywords
       // console.log(that.classId);
       if (initpage) { // 初始化 文章id为0开始
@@ -96,7 +96,7 @@ export default {
         that.articleList = []
       }
       getLikeCollectList(that.userId, that.artId, that.articleName, that.like, (result) => {
-        if (result.code == 1001) {
+        if (result.code === 1001) {
           var msg = result.data
           // console.log(result.data);
           if (msg.length > 0 && msg.length < 8) {
@@ -107,7 +107,7 @@ export default {
           that.articleList = that.articleList.concat(msg)
           that.artId = msg[msg.length - 1].id
           // console.log(that.artId);
-        } else if (result.code == 1003) {
+        } else if (result.code === 1003) {
           that.hasMore = false
         }
       })

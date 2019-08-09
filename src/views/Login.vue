@@ -1,136 +1,134 @@
 <!-- 登录注册 -->
 <template>
-    <div>
-        <div class="container">
-            <h1 class="loginTitle">
-                <a href="#/">储学长的博客</a>
-            </h1>
-            <!-- 登录注册 -->
-            <div v-show="!err2005" class="">
-                <div v-if="login===1" class="loginBox">
-                    <div class="lr-title">
-                        <h1>登录</h1>
-                        <p>
-                            新用户<a href="#/Login?login=0" class="tcolors">注册</a>
-                        </p>
-                    </div>
-                    <el-alert
-                        v-show="loginErr"
-                        :title="loginTitle"
-                        type="error"
-                        show-icon  :closable="false">
-                    </el-alert>
-                    <el-input
-                        type="email"
-                        placeholder="邮箱"
-                        v-model="email">
-                    </el-input>
-                    <el-alert
-                        v-show="emailErr"
-                        title="请输入邮箱"
-                        type="error"
-                        show-icon  :closable="false">
-                    </el-alert>
-                    <el-input
-                            type="password"
-                          placeholder="密码"
-                           @keyup.enter.native="loginEnterFun"
-                          v-model="password">
-                    </el-input>
-                    <el-alert
-                        v-show="passwordErr"
-                        title="请输入密码"
-                        type="error"
-                        show-icon  :closable="false">
-                    </el-alert>
-                    <h3><a href="">忘记密码？</a></h3>
-                    <div class="lr-btn tcolors-bg" @click="gotoHome">登录</div>
-                    <div class="otherLogin" >
-                        <a href="javascript:void(0)"><i class="fa fa-fw fa-wechat"></i></a>
-                        <a href="javascript:void(0)"><i class="fa fa-fw fa-qq"></i></a>
-                        <a href="javascript:void(0)"><i class="fa fa-fw fa-weibo"></i></a>
-                    </div>
+    <div class="container-login">
+        <h1 class="loginTitle">
+            <a href="#/">储学长的博客</a>
+        </h1>
+        <!-- 登录注册 -->
+        <div v-show="!err2005" class="">
+            <div v-if="login===1" class="loginBox">
+                <div class="lr-title">
+                    <h1>登录</h1>
+                    <p>
+                        新用户<a href="#/Login?login=0" class="tcolors">注册</a>
+                    </p>
                 </div>
-                <div v-else class="registerBox">
-                    <div class="lr-title">
-                        <h1>注册</h1>
-                        <p>
-                            已有账号<a href="#/Login?login=1" class="tcolors">登录</a>
-                        </p>
-                    </div>
-                    <el-alert
-                        v-show="registerErr"
-                        :title="registerTitle"
-                        type="error"
-                        show-icon  :closable="false">
-                    </el-alert>
-                    <el-input
-                        type="text"
-                        placeholder="用户名"
-                        v-model="nusername">
-                    </el-input>
-                    <el-alert
-                        v-show="nusernameErr"
-                        title="用户名错误"
-                        type="error"
-                        show-icon  :closable="false">
-                    </el-alert>
-                    <el-input
-                        type="email"
-                        placeholder="邮箱"
-                        v-model="nemail">
-                    </el-input>
-                    <el-alert
-                        v-show="nemailErr"
-                        title="邮箱错误"
-                        type="error"
-                        show-icon  :closable="false">
-                    </el-alert>
-                    <el-input
-                          type="password"
-                          placeholder="密码:6-12位英文、数字、下划线"
-                          v-model="npassword">
-                    </el-input>
-                    <el-alert
-                        v-show="npasswordErr"
-                        title="密码错误"
-                        type="error"
-                        show-icon  :closable="false">
-                    </el-alert>
-                    <el-input
-                            type="password"
-                          placeholder="确认密码"
-                           @keyup.enter.native="registerEnterFun"
-                          v-model="npassword2">
-                    </el-input>
-                    <el-alert
-                        v-show="npassword2Err"
-                        title="重复密码有误"
-                        type="error"
-                        show-icon  :closable="false">
-                    </el-alert>
-                    <div class="lr-btn tcolors-bg" @click="newRegister" v-loading.fullscreen.lock="fullscreenLoading"  element-loading-text="提交中">注册</div>
+                <el-alert
+                    v-show="loginErr"
+                    :title="loginTitle"
+                    type="error"
+                    show-icon  :closable="false">
+                </el-alert>
+                <el-input
+                    type="email"
+                    placeholder="邮箱"
+                    v-model="email">
+                </el-input>
+                <el-alert
+                    v-show="emailErr"
+                    title="请输入邮箱"
+                    type="error"
+                    show-icon  :closable="false">
+                </el-alert>
+                <el-input
+                        type="password"
+                      placeholder="密码"
+                       @keyup.enter.native="loginEnterFun"
+                      v-model="password">
+                </el-input>
+                <el-alert
+                    v-show="passwordErr"
+                    title="请输入密码"
+                    type="error"
+                    show-icon  :closable="false">
+                </el-alert>
+                <h3><a href="">忘记密码？</a></h3>
+                <div class="lr-btn tcolors-bg" @click="gotoHome">登录</div>
+                <div class="otherLogin" >
+                    <a href="javascript:void(0)"><i class="fa fa-fw fa-wechat"></i></a>
+                    <a href="javascript:void(0)"><i class="fa fa-fw fa-qq"></i></a>
+                    <a href="javascript:void(0)"><i class="fa fa-fw fa-weibo"></i></a>
                 </div>
             </div>
-            <!-- 注册进度状态 -->
-            <div v-show="err2005" class="registerSuc">
-                <div class="sucIcon">
-                    <el-steps :space="100" :active="step" finish-status="success">
-                      <el-step title="注册"></el-step>
-                      <el-step title="验证"></el-step>
-                      <el-step title="登录"></el-step>
-                    </el-steps>
+            <div v-else class="registerBox">
+                <div class="lr-title">
+                    <h1>注册</h1>
+                    <p>
+                        已有账号<a href="#/Login?login=1" class="tcolors">登录</a>
+                    </p>
                 </div>
-                <div v-show="urlstate===0" class="sucContent">
-                    账号激活链接已发送至您的邮箱：{{nemail}}
-                    <p>请您在24小时内登录邮箱，按邮件中的提示完成账号激活操作</p>
-                </div>
-                <div v-show="urlstate==='urlInvalid'" class="sucContent">
-                    账号已激活，现在去登录 &nbsp;&nbsp;<span class="tcolors-bg lastbtn" @click="goLogin">登录</span>
-                </div>
-                <div v-show="urlstate==='urlErr'" class="sucContent">
-                    OwO邮箱激活地址已超时，验证失败，请重新注册 &nbsp;&nbsp;<span class="tcolors-bg lastbtn" @click="goRegister">注册</span>
-                </div>
+                <el-alert
+                    v-show="registerErr"
+                    :title="registerTitle"
+                    type="error"
+                    show-icon  :closable="false">
+                </el-alert>
+                <el-input
+                    type="text"
+                    placeholder="用户名"
+                    v-model="nusername">
+                </el-input>
+                <el-alert
+                    v-show="nusernameErr"
+                    title="用户名错误"
+                    type="error"
+                    show-icon  :closable="false">
+                </el-alert>
+                <el-input
+                    type="email"
+                    placeholder="邮箱"
+                    v-model="nemail">
+                </el-input>
+                <el-alert
+                    v-show="nemailErr"
+                    title="邮箱错误"
+                    type="error"
+                    show-icon  :closable="false">
+                </el-alert>
+                <el-input
+                      type="password"
+                      placeholder="密码:6-12位英文、数字、下划线"
+                      v-model="npassword">
+                </el-input>
+                <el-alert
+                    v-show="npasswordErr"
+                    title="密码错误"
+                    type="error"
+                    show-icon  :closable="false">
+                </el-alert>
+                <el-input
+                        type="password"
+                      placeholder="确认密码"
+                       @keyup.enter.native="registerEnterFun"
+                      v-model="npassword2">
+                </el-input>
+                <el-alert
+                    v-show="npassword2Err"
+                    title="重复密码有误"
+                    type="error"
+                    show-icon  :closable="false">
+                </el-alert>
+                <div class="lr-btn tcolors-bg" @click="newRegister" v-loading.fullscreen.lock="fullscreenLoading"  element-loading-text="提交中">注册</div>
+            </div>
+        </div>
+        <!-- 注册进度状态 -->
+        <div v-show="err2005" class="registerSuc">
+            <div class="sucIcon">
+                <el-steps :space="100" :active="step" finish-status="success">
+                  <el-step title="注册"></el-step>
+                  <el-step title="验证"></el-step>
+                  <el-step title="登录"></el-step>
+                </el-steps>
+            </div>
+            <div v-show="urlstate===0" class="sucContent">
+                账号激活链接已发送至您的邮箱：{{nemail}}
+                <p>请您在24小时内登录邮箱，按邮件中的提示完成账号激活操作</p>
+            </div>
+            <div v-show="urlstate==='urlInvalid'" class="sucContent">
+                账号已激活，现在去登录 &nbsp;&nbsp;<span class="tcolors-bg lastbtn" @click="goLogin">登录</span>
+            </div>
+            <div v-show="urlstate==='urlErr'" class="sucContent">
+                OwO邮箱激活地址已超时，验证失败，请重新注册 &nbsp;&nbsp;<span class="tcolors-bg lastbtn" @click="goRegister">注册</span>
             </div>
         </div>
     </div>
@@ -299,14 +297,19 @@ export default {
 
 <style>
 /*登录注册标题*/
+.container-login{
+  width: 100vw;
+  height: 100vh;
+  background: center / cover no-repeat url("~@/assets/img/blog_bg.jpg");
+}
 .loginTitle{
     text-align: center;
     font-size: 26px;
-    padding-top:50px;
+    padding-top:100px;
     margin-bottom: 20px;
 }
 .loginBox ,.registerBox{
-    background: #fff;
+    background: rgba(255,2555,255, 0.3);
     padding:40px;
     max-width:320px;
     margin:0 auto;

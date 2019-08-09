@@ -4,12 +4,12 @@
         <wbc-nav></wbc-nav>
         <div class="container">
             <el-row  :gutter="30">
-                <el-col :sm="24" :md="16" style="transition:all .5s ease-out;margin-bottom:30px;">
-                    <wbc-sharelist></wbc-sharelist>
-                </el-col>
-                <el-col :sm="24"  :md="8" >
-                    <wbc-rightlist></wbc-rightlist>
-                </el-col>
+              <el-col :sm="24" :md="16" style="transition:all .5s ease-out;margin-bottom:30px;">
+                <wbc-sharelist></wbc-sharelist>
+              </el-col>
+              <el-col :sm="24"  :md="8" >
+                <wbc-rightlist></wbc-rightlist>
+              </el-col>
             </el-row>
         </div>
         <wbc-footer></wbc-footer>
