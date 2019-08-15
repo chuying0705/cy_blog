@@ -16,6 +16,14 @@ mongoose.connect(config.db, { useNewUrlParser: true }, err => {
 const bodyParser = require('koa-bodyparser')
 app.use(bodyParser({ multipart: true }))
 
+const koaBody = require('koa-body')
+app.use(koaBody({
+  multipart: true,
+  formidable: {
+    maxFileSize: 200 * 1024 * 1024
+  }
+}))
+
 // const userRouter = require('./server/routes/user')
 // app.use(userRouter.routes()).use(userRouter.allowedMethods())
 const router = require('./server/routes/index')
