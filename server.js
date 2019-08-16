@@ -29,6 +29,12 @@ app.use(koaBody({
 const router = require('./server/routes/index')
 app.use(router.routes(), router.allowedMethods())
 
+// 设置静态资源文件夹
+const Static = require('koa-static')
+const path = require('path')
+let staticPath = path.join(__dirname)
+app.use(Static(staticPath))
+
 app.on('error', function (err, ctx) {
   console.log('server error', err)
 })
