@@ -1,4 +1,6 @@
 const userCol = require('../models/user')
+// const jwt = require('koa-jwt')
+// const config = require('../config/config')
 const getUser = async (ctx, next) => {
   const query = ctx.query
   const user = await userCol.findOne({ name: query.name })
@@ -46,6 +48,12 @@ const userLogin = async (ctx, next) => {
   console.log(user)
   if (user) {
     if (user.password === req.password) {
+      // const userToken = {
+      //   name: user.name,
+      //   id: user._id
+      // }
+      // const token = jwt.sign(userToken, config.tokenSecret, { expiresIn: '2h' })
+      // console.log(token)
       ctx.body = {
         code: 0,
         msg: 'success',

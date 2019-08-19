@@ -35,6 +35,24 @@ const path = require('path')
 let staticPath = path.join(__dirname)
 app.use(Static(staticPath))
 
+// josnwebtoken
+// const jwt = require('koa-jwt')
+// app.use(jwt({
+//   secret: 'SeniorChu'
+// }).unless({
+//   path: [/\/user\/login/, /\/user\/register/]
+// }))
+// app.use((ctx, next) => {
+//   return next().catch(err => {
+//     if (err.status === 401) {
+//       ctx.status = '401'
+//       ctx.body = 'Protected resource, use Authorization header to get access\\n'
+//     } else {
+//       throw err
+//     }
+//   })
+// })
+
 app.on('error', function (err, ctx) {
   console.log('server error', err)
 })
