@@ -13,8 +13,9 @@ mongoose.connect(config.db, { useNewUrlParser: true }, err => {
 // const router = new Router({
 //   // prefix: '/api'
 // })
-const bodyParser = require('koa-bodyparser')
-app.use(bodyParser({ multipart: true }))
+// koa-bodyparser 和 koa-body同时使用会使post请求abort
+// const bodyParser = require('koa-bodyparser')
+// app.use(bodyParser({ multipart: true }))
 
 const koaBody = require('koa-body')
 app.use(koaBody({
@@ -23,6 +24,16 @@ app.use(koaBody({
     maxFileSize: 200 * 1024 * 1024
   }
 }))
+
+// josnwebtoken
+const koajwt = require('koa-jwt')
+app.use(koajwt({
+  secret: 'SeniorChu'
+}).unless({
+  path: [/\/user\/login/, /\/user\/register/]
+}))
+const errorHandle = require('./server/middlewares/errorHandle')
+app.use(errorHandle())
 
 // const userRouter = require('./server/routes/user')
 // app.use(userRouter.routes()).use(userRouter.allowedMethods())
@@ -34,24 +45,6 @@ const Static = require('koa-static')
 const path = require('path')
 let staticPath = path.join(__dirname)
 app.use(Static(staticPath))
-
-// josnwebtoken
-// const jwt = require('koa-jwt')
-// app.use(jwt({
-//   secret: 'SeniorChu'
-// }).unless({
-//   path: [/\/user\/login/, /\/user\/register/]
-// }))
-// app.use((ctx, next) => {
-//   return next().catch(err => {
-//     if (err.status === 401) {
-//       ctx.status = '401'
-//       ctx.body = 'Protected resource, use Authorization header to get access\\n'
-//     } else {
-//       throw err
-//     }
-//   })
-// })
 
 app.on('error', function (err, ctx) {
   console.log('server error', err)

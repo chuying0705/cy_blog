@@ -4,7 +4,7 @@ const router = new Router()
 const userController = require('../controllers/user')
 
 router.get('/query', userController.getUser)
-router.post('/add', userController.postUser)
+router.post('/register', userController.postUser)
 router.post('/login', userController.userLogin)
 
 // const categoryController = require('../controllers/category')
