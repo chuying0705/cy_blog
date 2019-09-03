@@ -18,7 +18,7 @@ const errorHandle = (ctx, next) => {
           console.log('token verify fail:', err)
         }
       }
-      console.log(`token ${token}`)
+      // console.log(`token ${token}`)
       await next()
     } catch (err) {
       if (err.status === 401) {

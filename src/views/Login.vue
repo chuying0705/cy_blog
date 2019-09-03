@@ -207,6 +207,7 @@ export default {
           if (data.code === 0) { // 登录成功
             localStorage.setItem('userInfo', JSON.stringify(data.data))
             localStorage.setItem('accessToken', data.token)
+            localStorage.setItem('accessToken', data.token)
             if (localStorage.getItem('logUrl')) {
               that.$router.push({ path: localStorage.getItem('logUrl') })
             } else {

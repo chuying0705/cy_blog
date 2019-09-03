@@ -34,7 +34,7 @@ export default {
   // @tcolord:#48456D;//按钮hover 的颜色
 
   /*reset*/
-  html, body, div, span, applet, object, iframe,
+ /* html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
   del, dfn, em, img, ins, kbd, q, s, samp,
@@ -50,7 +50,7 @@ export default {
     margin: 0;
     padding: 0;
     border: 0;
-    font: inherit;
+    !*font: inherit;*!
   }
   body{
     font-family:Arial,"STHeiti", Helvetica, sans-serif;
@@ -97,12 +97,12 @@ export default {
   a{
     text-decoration:none;
   }
-  html{-webkit-text-size-adjust:none;width:100%;height:100% } /*????iphone??safari????????????*/
+  html{-webkit-text-size-adjust:none;width:100%;height:100% } !*????iphone??safari????????????*!
   input[type="text"], input[type="button"], input[type="submit"], input[type="search"]{
     -webkit-appearance:none;
     border-radius:0;
   }
-  /*************其他内容*************/
+  !*************其他内容*************!
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -216,8 +216,8 @@ export default {
     width:100%;
   }
   .viewmore a{
-    /*background:  #97dffd;*/
-    /*padding:6px 0;*/
+    !*background:  #97dffd;*!
+    !*padding:6px 0;*!
     border-radius: 5px;
     text-align: center;
     font-size: 14px;
@@ -396,8 +396,8 @@ export default {
     clear: both
   }
   .smalltitle{
-    /*height:36px;*/
-    /*line-height: 36px;*/
+    !*height:36px;*!
+    !*line-height: 36px;*!
   }
 
   .logoImg{
@@ -444,6 +444,6 @@ export default {
   .ui.label a{
     color:#fff;
     line-height: 100%;
-  }
+  }*/
 
 </style>

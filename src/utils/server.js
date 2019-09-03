@@ -19,7 +19,7 @@ const getRegister = (username, password, email, callback) => {
 
 // 用户登录
 const UserLogin = (email, password, callback) => {
-  let url = '/user/login'
+  let url = 'http://localhost:3000/user/login'
   let params = {
     password: password,
     email: email

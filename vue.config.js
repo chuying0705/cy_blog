@@ -96,20 +96,20 @@ module.exports = {
 
     // See https://github.com/vuejs/vue-cli/blob/dev/docs/cli-service.md#configuring-proxy
 
-    proxy: {
-      // '/api': {
-      //   target: 'https://api.metro.com.cn',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/api': '/'
-      //   }
-      // },
-      '/': {
-        target: 'http://172.16.11.93:3000',
-        ws: false,
-        changeOrigin: true
-      }
-    }
+    // proxy: {
+    //   // '/api': {
+    //   //   target: 'https://api.metro.com.cn',
+    //   //   changeOrigin: true,
+    //   //   pathRewrite: {
+    //   //     '^/api': '/'
+    //   //   }
+    //   // },
+    //   '/': {
+    //     target: 'http://localhost:3000',
+    //     ws: false,
+    //     changeOrigin: true
+    //   }
+    // }
 
     // string | Object
     // before: app => {}

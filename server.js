@@ -17,6 +17,21 @@ mongoose.connect(config.db, { useNewUrlParser: true }, err => {
 // const bodyParser = require('koa-bodyparser')
 // app.use(bodyParser({ multipart: true }))
 
+const cors = require('koa2-cors')
+app.use(cors({
+  origin: function (ctx) {
+    if (ctx.url === '/test') {
+      return '*'
+    }
+    return 'http://localhost:8080'
+  },
+  exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+  maxAge: 5,
+  credentials: true,
+  allowMethods: ['GET', 'POST', 'DELETE'],
+  allowHeaders: ['Content-Type', 'Authorization', 'Accept']
+}))
+
 const koaBody = require('koa-body')
 app.use(koaBody({
   multipart: true,
@@ -30,7 +45,7 @@ const koajwt = require('koa-jwt')
 app.use(koajwt({
   secret: 'SeniorChu'
 }).unless({
-  path: [/\/user\/login/, /\/user\/register/]
+  path: [/\/user\/login/, /\/user\/register/, /\/public/, /\/file/ ]
 }))
 const errorHandle = require('./server/middlewares/errorHandle')
 app.use(errorHandle())

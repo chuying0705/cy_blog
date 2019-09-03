@@ -1,5 +1,20 @@
 let mongoose = require('mongoose')
 let Schema = mongoose.Schema
+let commentSchema = new Schema({
+  // comment_id: { type: String, requireed: true },
+  // comment_time: Date,
+  comment_from: { type: String, requireed: true },
+  comment_content: { type: String, requireed: true },
+  comment_like: { type: Number, default: 0 },
+  reply: [{
+    reply_from: { type: String, requireed: true },
+    reply_to: { type: String, requireed: true },
+    reply_content: { type: String, requireed: true },
+    reply_time: Date
+  }]
+}, {
+  timestamps: { createdAt: 'comment_time' }
+})
 let ArticleSchema = new Schema({
   category: { type: String, requireed: true },
   title: { type: String, requireed: true },
@@ -9,8 +24,9 @@ let ArticleSchema = new Schema({
   readCount: { type: Number, default: 0 },
   likeCount: { type: Number, default: 0 },
   tag: [String],
-  from: { type: String, requireed: true },
-  authorId: { type: String, requireed: true }
+  from: { type: Number, requireed: true, enum: [0, 1] },
+  authorId: { type: String, requireed: true },
+  comments: [commentSchema]
 }, {
   collection: 'article',
   // versionKey: false,
