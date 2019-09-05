@@ -92,7 +92,7 @@ module.exports = {
 
     https: false,
 
-    hotOnly: false,
+    hotOnly: false
 
     // See https://github.com/vuejs/vue-cli/blob/dev/docs/cli-service.md#configuring-proxy
 

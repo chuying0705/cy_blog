@@ -17,6 +17,27 @@ mongoose.connect(config.db, { useNewUrlParser: true }, err => {
 // const bodyParser = require('koa-bodyparser')
 // app.use(bodyParser({ multipart: true }))
 
+// log日志
+// app.use(async (ctx, next) => {
+//   ctx.util = {
+//     log: require('./server/utils/log')
+//   }
+//   await next()
+// })
+// app.use(async (ctx, next) => {
+// ctx.util.log.info('Ssss')
+// await next()
+// })
+const ip = require('ip')
+const logger = require('./server/utils/log')
+app.use(logger({
+  env: 'dev',
+  projectName: 'cy_blog',
+  appLogLevel: 'info',
+  dir: 'logs',
+  serverIp: ip.address()
+}))
+
 const cors = require('koa2-cors')
 app.use(cors({
   origin: function (ctx) {
@@ -45,7 +66,7 @@ const koajwt = require('koa-jwt')
 app.use(koajwt({
   secret: 'SeniorChu'
 }).unless({
-  path: [/\/user\/login/, /\/user\/register/, /\/public/, /\/file/ ]
+  path: [ /\/user\/login/, /\/user\/register/, /\/public/, /\/file/ ]
 }))
 const errorHandle = require('./server/middlewares/errorHandle')
 app.use(errorHandle())
@@ -67,6 +88,10 @@ app.on('error', function (err, ctx) {
 
 app.listen(config.port, () => {
   console.log(`Koa is listening in ${config.port}`)
+})
+
+app.on('error', err => {
+  logger.error(err)
 })
 
 module.exports = app
