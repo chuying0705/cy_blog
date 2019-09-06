@@ -1,6 +1,7 @@
 const userCol = require('../models/user')
 const jwt = require('jsonwebtoken')
 const secret = require('../config/secret.json')
+const { validate, enbcrypt } = require('../utils/bcrypt')
 const getUser = async (ctx, next) => {
   const query = ctx.query
   const user = await userCol.findOne({ name: query.name })
@@ -39,7 +40,7 @@ const postUser = async (ctx, next) => {
   } else {
     userCol.create({
       name: req.name,
-      password: req.password,
+      password: await enbcrypt(req.password),
       email: req.email
     })
     ctx.body = {
@@ -51,28 +52,33 @@ const postUser = async (ctx, next) => {
 const userLogin = async (ctx, next) => {
   const req = ctx.request.body
   const user = await userCol.findOne({ email: req.email })
-  console.log(req)
-  console.log(user)
+  // console.log(req)
+  // console.log(user)
   if (user) {
-    if (user.password === req.password) {
-      const userToken = {
-        name: user.name,
-        id: user._id
+    validate(req.password, user.password).then(res => {
+      if (res) {
+        const userToken = {
+          name: user.name,
+          id: user._id
+        }
+        const token = jwt.sign(userToken, secret.sign, { expiresIn: '2h' })
+        console.log(token)
+        ctx.body = {
+          code: 0,
+          msg: 'success',
+          token: token,
+          data: user
+        }
+      } else {
+        ctx.body = {
+          code: -1,
+          msg: '用户名或密码错误'
+        }
       }
-      const token = jwt.sign(userToken, secret.sign, { expiresIn: '2h' })
-      console.log(token)
-      ctx.body = {
-        code: 0,
-        msg: 'success',
-        token: token,
-        data: user
-      }
-    } else {
-      ctx.body = {
-        code: -1,
-        msg: '用户名或密码错误'
-      }
-    }
+    }).catch((err) => {
+      console.log(err)
+      throw new Error()
+    })
   } else {
     ctx.body = {
       code: -1,

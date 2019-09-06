@@ -38,6 +38,7 @@ app.use(logger({
   serverIp: ip.address()
 }))
 
+// 跨域
 const cors = require('koa2-cors')
 app.use(cors({
   origin: function (ctx) {
@@ -89,9 +90,4 @@ app.on('error', function (err, ctx) {
 app.listen(config.port, () => {
   console.log(`Koa is listening in ${config.port}`)
 })
-
-app.on('error', err => {
-  logger.error(err)
-})
-
 module.exports = app
